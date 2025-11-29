@@ -94,6 +94,13 @@
   <script>
     // ======== ФАЙЛЫ С КАТЕГОРИЯМИ ========
     const files = [
+      // Пример с обычным файлом:
+      { name: "Документ.pdf", url: "files/doc.pdf", category: "Документы" },
+
+      // Пример с внешней ссылкой на скачивание:
+      // (url может быть пустым, если используется только external)
+      { name: "Большой файл с облака", url: "", external: "https://example.com/download/file.zip", category: "Внешние" },
+
       { name: "Документ.pdf", url: "files/doc.pdf", category: "Документы" },
       { name: "Фото.png", url: "files/photo.png", category: "Изображения" },
       { name: "Архив.zip", url: "files/archive.zip", category: "Архивы" },
@@ -127,6 +134,18 @@
         div.className = "file-item";
 
         div.innerHTML = `
+          <span>${file.name}</span>
+
+          ${file.url ? `
+            <a href="${file.url}" download>
+              <button>Скачать</button>
+            </a>` : ``}
+
+          ${file.external ? `
+            <a href="${file.external}" target="_blank">
+              <button>Скачать по ссылке</button>
+            </a>` : ``}
+        `;
           <span>${file.name}</span>
           <a href="${file.url}" download>
             <button>Скачать</button>
